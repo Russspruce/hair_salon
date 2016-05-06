@@ -1,0 +1,10 @@
+<h1>$stylist.getStyler()</h1>
+
+<ul>
+  #foreach($client in $stylist.getClients())
+    <li><a href="/clients/$client.getId()">$client.getName()</a></li>
+  #end
+</ul>
+
+<a href="/stylists/$stylist.getId()/clients/new">Add a client</a>
+<a href="/stylists">Back home</a>
