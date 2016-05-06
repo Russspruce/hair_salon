@@ -1,5 +1,6 @@
 import java.util.List;
 import org.sql2o.*;
+import java.util.Arrays;
 
 public class Client {
   private int id;
@@ -55,12 +56,13 @@ public class Client {
 
   public static Client find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM clients where id=:id";
+      String sql = "SELECT * FROM clients WHERE id=:id";
       Client client = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Client.class);
     return client;
     }
   }
+
 
 }

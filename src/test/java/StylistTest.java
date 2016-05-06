@@ -42,18 +42,29 @@ public DatabaseRule database = new DatabaseRule();
   // GET ID TEST
   @Test
   public void save_assignsIdToObject() {
-    Stylist myStylist = new Stylist("Jonny Bravo");
-    myStylist.save();
+    Stylist testStylist = new Stylist("Jonny Bravo");
+    testStylist.save();
     Stylist savedStylist = Stylist.all().get(0);
-    assertEquals(myStylist.getId(), savedStylist.getId());
+    assertEquals(testStylist.getId(), savedStylist.getId());
   }
 
-  // FIND RESTAURANT IN DATABASE
   @Test
   public void find_findsStylistInDatabase_true() {
-    Stylist myStylist = new Stylist("Leilei Masters");
-    myStylist.save();
-    Stylist savedStylist = Stylist.find(myStylist.getId());
-    assertTrue(myStylist.equals(savedStylist));
+    Stylist testStylist = new Stylist("Leilei Masters");
+    testStylist.save();
+    Stylist savedStylist = Stylist.find(testStylist.getId());
+    assertTrue(testStylist.equals(savedStylist));
+  }
+
+  @Test
+  public void getClients_retrievesAllClientssFromDatabase_ClientsList() {
+    Stylist testStylist = new Stylist("Zohan");
+    testStylist.save();
+    Client firstClient = new Client("Jimmy Two-Shoes", testStylist.getId());
+    firstClient.save();
+    Client secondClient = new Client("Renard Vulpine", testStylist.getId());
+    secondClient.save();
+    Client[] clients = new Client[] { firstClient, secondClient };
+    assertTrue(testStylist.getClient().containsAll(Arrays.asList(clients)));
   }
 }
