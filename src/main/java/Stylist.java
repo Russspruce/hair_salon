@@ -17,4 +17,43 @@ public class Stylist {
     return id;
   }
 
+  public static List<Stylist> all() {
+    String sql = "SELECT id, styler FROM stylists";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Stylist.class);
+    }
+  }
+
+  @Override
+  public boolean equals(Object otherStylist) {
+    if(!(otherStylist instanceof Stylist)) {
+      return false;
+    } else {
+      Stylist newStylist = (Stylist) otherStylist;
+      return this.getStyler().equals(newStylist.getStyler()) &&
+        this.getId() == newStylist.getId();
+    }
+  }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO stylists(styler) VALUES (:styler)";
+      this.id = (int) con.createQuery(sql, true)
+      .addParameter("styler", this.styler)
+      .executeUpdate()
+      .getKey();
+    }
+  }
+
+  public static Stylist find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM stylists where id=:id";
+      Stylist stylist = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Stylist.class);
+    return stylist;
+    }
+  }
+
+
 }
