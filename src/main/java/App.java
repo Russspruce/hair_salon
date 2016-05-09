@@ -51,5 +51,35 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/stylists/:id/clients/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+      model.put("stylist", stylist);
+      model.put("template", "templates/client-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/clients", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylist_id")));
+      String name = request.queryParams("name");
+      // ** THIS SECTION UPDATED FOR DB VERSION ***
+      Client newClient = new Client(name, stylist.getId());
+      newClient.save();
+      model.put("stylist", stylist);
+      model.put("template", "templates/client-success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    // get("/stylists/:stylist_id/clients/:id", (request, response) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //   Stylist stylist = Stylist.find(Integer.parseInt(request.params(":stylist_id")));
+    //   Client client = Client.find(Integer.parseInt(request.params(":id")));
+    //   model.put("stylist", stylist);
+    //   model.put("client", client);
+    //   model.put("template", "templates/client.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
+
   }
 }

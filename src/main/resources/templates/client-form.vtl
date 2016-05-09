@@ -1,0 +1,14 @@
+<h1>Schedule in a Client</h1>
+
+<p>Enter in a client for an appointment.</p>
+
+<form action='/client' method='post'>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input id="name" name="name" class="form-control" type="text">
+  </div>
+
+ <input id="stylist_id" name="stylist_id" type="hidden" value="$stylist.getId()">
+
+  <button type="submit" class="btn btn-info">Enter in client</button>
+</form>

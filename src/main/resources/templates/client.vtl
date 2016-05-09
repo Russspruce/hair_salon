@@ -1,0 +1,10 @@
+<h1>$stylist.getName()</h1>
+<br>
+<br>
+<ul>
+  #foreach($review in $restaurant.getReviews())
+    <li>$review.getInfo()</li>
+  #end
+</ul>
+
+<a href="/restaurants/$restaurant.getId()/reviews/new">Add a review</a>
