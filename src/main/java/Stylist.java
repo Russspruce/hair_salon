@@ -32,7 +32,7 @@ public class Stylist {
     } else {
       Stylist newStylist = (Stylist) otherStylist;
       return this.getStyler().equals(newStylist.getStyler()) &&
-        this.getId() == newStylist.getId();
+      this.getId() == newStylist.getId();
     }
   }
 
@@ -52,7 +52,7 @@ public class Stylist {
       Stylist stylist = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Stylist.class);
-    return stylist;
+      return stylist;
     }
   }
 
@@ -65,12 +65,27 @@ public class Stylist {
     }
   }
 
+  public Client getClient(int clientId){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "SELECT * FROM clients WHERE stylist_id = :stylist_id AND id = :id";
+      return con.createQuery(sql).addParameter("stylist_id", this.id).addParameter("id", clientId).executeAndFetchFirst(Client.class);
+    }
+  }
+
   public List<Client> getClients() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM clients WHERE stylist_id=:id";
       return con.createQuery(sql)
       .addParameter("id", this.id)
       .executeAndFetch(Client.class);
+    }
+
+  }
+
+  public static void delete(Stylist stylist){
+    try(Connection con = DB.sql2o.open()){
+      String sql = "DELETE FROM stylists WHERE id = :id";
+      con.createQuery(sql).addParameter("id", stylist.getId()).executeUpdate();
     }
 
   }

@@ -38,8 +38,8 @@ public class Client {
     } else {
       Client newClient = (Client) otherClient;
       return this.getName().equals(newClient.getName()) &&
-             this.getId() == newClient.getId() &&
-             this.getStylistId() == newClient.getStylistId();
+      this.getId() == newClient.getId() &&
+      this.getStylistId() == newClient.getStylistId();
     }
   }
 
@@ -60,7 +60,7 @@ public class Client {
       Client client = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Client.class);
-    return client;
+      return client;
     }
   }
 

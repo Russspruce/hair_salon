@@ -29,6 +29,9 @@ _Please email me at russspruce@gmail.com with any questions or comments._
 
 _{Bootstrap}_
 _{HTML/CSS}_
+_{Java}_
+_{jQuery}_
+_{Spark}_
 
 ### License
 
