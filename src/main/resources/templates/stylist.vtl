@@ -1,13 +1,14 @@
 <h1>$stylist.getStyler()</h1>
+<br>
 
 <ul>
   #foreach($client in $stylist.getClients())
     <li>$client.getName()</li>
   #end
 </ul>
-
+<br>
 <form action="/stylists/$stylist.getId()/delete">
-  <button type="submit" class="btn btn-danger">Delete Stylist</button>
+  <button type="submit" class="btn btn-danger">Logout Stylist</button>
 </form>
 
 <a href="/stylists/$stylist.getId()/clients/new">Add a client</a>

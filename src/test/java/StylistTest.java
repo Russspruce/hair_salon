@@ -65,6 +65,6 @@ public DatabaseRule database = new DatabaseRule();
     Client secondClient = new Client("Renard Vulpine", testStylist.getId());
     secondClient.save();
     Client[] clients = new Client[] { firstClient, secondClient };
-    assertTrue(testStylist.getClient().containsAll(Arrays.asList(clients)));
+    assertTrue(testStylist.getClients().containsAll(Arrays.asList(clients)));
   }
 }
